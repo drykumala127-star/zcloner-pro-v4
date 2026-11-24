@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "759195378420",
+    "project_id": "zclone-fms",
+    "storage_bucket": "zclone-fms.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759195378420:android:31a76558d408d0d00a34a1",
+        "android_client_info": {
+          "package_name": "com.fms.zclone.enginecoremode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759195378420-b4vgeg40ks16f9mqhnj2j55bvmrtbm32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fms.zclone.enginecoremode",
+            "certificate_hash": "4111a821f9e72e05f808c4dd93e29c1feb545eec"
+          }
+        },
+        {
+          "client_id": "759195378420-mm10089092afi6puq026cie7ir0ol7e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIYt2HkcfjRSQWyus48X8aBGGSoVJZGxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759195378420-mm10089092afi6puq026cie7ir0ol7e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

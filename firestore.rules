@@ -1,0 +1,201 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidUserProfile(data, userId) {
+      return data.userId is string && data.userId == userId &&
+             data.displayName is string && data.displayName.size() >= 1 && data.displayName.size() <= 80 &&
+             data.tier in ['FREE', 'PREMIUM', 'ULTRA'] &&
+             data.deviceLimit is int && data.deviceLimit >= 1 && data.deviceLimit <= 20 &&
+             data.activeThemeId is string && data.activeThemeId.size() >= 1 && data.activeThemeId.size() <= 64 &&
+             data.languageCode in ['id', 'en'] &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidDeviceRegistration(data, userId) {
+      return data.userId is string && data.userId == userId &&
+             data.installUuid is string && data.installUuid.size() >= 8 && data.installUuid.size() <= 64 &&
+             data.installUuid.matches('^[a-zA-Z0-9_\\-]+$') &&
+             data.deviceLabel is string && data.deviceLabel.size() >= 1 && data.deviceLabel.size() <= 60 &&
+             data.modelName is string && data.modelName.size() >= 1 && data.modelName.size() <= 80 &&
+             data.androidVersion is string && data.androidVersion.size() >= 1 && data.androidVersion.size() <= 32 &&
+             data.appVersion is string && data.appVersion.size() >= 1 && data.appVersion.size() <= 32 &&
+             data.status in ['ACTIVE', 'INACTIVE', 'REVOKED'] &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.lastSyncAt is timestamp && data.lastSyncAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidCloneConfig(data, userId) {
+      return data.userId is string && data.userId == userId &&
+             data.sourcePackage is string && data.sourcePackage.size() >= 3 && data.sourcePackage.size() <= 160 &&
+             data.targetPackage is string && data.targetPackage.size() >= 3 && data.targetPackage.size() <= 160 &&
+             data.sourceAppName is string && data.sourceAppName.size() >= 1 && data.sourceAppName.size() <= 80 &&
+             data.cloneName is string && data.cloneName.size() >= 1 && data.cloneName.size() <= 80 &&
+             data.iconPresetId is string && data.iconPresetId.size() >= 1 && data.iconPresetId.size() <= 40 &&
+             data.iconHueShift is int && data.iconHueShift >= 0 && data.iconHueShift <= 360 &&
+             data.changePackageName is bool &&
+             data.hideFromLauncher is bool &&
+             data.isolateData is bool &&
+             data.strippedPermissionsCount is int && data.strippedPermissionsCount >= 0 && data.strippedPermissionsCount <= 500 &&
+             data.compatibilityStatus in ['VERIFIED', 'COMPATIBLE', 'LIMITED', 'UNSUPPORTED'] &&
+             data.buildStatus in ['SAVED', 'BUILT', 'EXPORTED'] &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidThemePreset(data, userId) {
+      return data.userId is string && data.userId == userId &&
+             data.name is string && data.name.size() >= 1 && data.name.size() <= 50 &&
+             data.primaryHex is string && data.primaryHex.size() >= 7 && data.primaryHex.size() <= 9 &&
+             data.secondaryHex is string && data.secondaryHex.size() >= 7 && data.secondaryHex.size() <= 9 &&
+             data.surfaceHex is string && data.surfaceHex.size() >= 7 && data.surfaceHex.size() <= 9 &&
+             data.fontFamily in ['SPACE_GROTESK', 'PLUS_JAKARTA_SANS', 'JETBRAINS_MONO'] &&
+             data.iconStyle in ['ROUNDED', 'SQUIRCLE', 'NEON_RING'] &&
+             data.customTheme is bool &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidSecurityReport(data, userId) {
+      return data.userId is string && data.userId == userId &&
+             data.packageName is string && data.packageName.size() >= 3 && data.packageName.size() <= 160 &&
+             data.appName is string && data.appName.size() >= 1 && data.appName.size() <= 80 &&
+             data.riskScore is int && data.riskScore >= 0 && data.riskScore <= 100 &&
+             data.riskLevel in ['LOW', 'MEDIUM', 'HIGH'] &&
+             data.exportedComponentsCount is int && data.exportedComponentsCount >= 0 && data.exportedComponentsCount <= 500 &&
+             data.dangerousPermissionsCount is int && data.dangerousPermissionsCount >= 0 && data.dangerousPermissionsCount <= 200 &&
+             data.cleartextAllowed is bool &&
+             data.debuggableFlag is bool &&
+             data.certSha256Prefix is string && data.certSha256Prefix.size() <= 64 &&
+             data.summary is string && data.summary.size() >= 1 && data.summary.size() <= 300 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    match /users/{userId} {
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow list: if false;
+
+      // Client cannot self-escalate tier or deviceLimit on create
+      allow create: if isOwner(userId) && isValidId(userId) &&
+                       incoming().keys().hasAll(['userId', 'displayName', 'tier', 'deviceLimit', 'activeThemeId', 'languageCode', 'createdAt', 'updatedAt']) &&
+                       incoming().keys().hasOnly(['userId', 'displayName', 'tier', 'deviceLimit', 'activeThemeId', 'languageCode', 'createdAt', 'updatedAt']) &&
+                       incoming().tier == 'FREE' &&
+                       incoming().deviceLimit == 3 &&
+                       isValidUserProfile(incoming(), userId);
+
+      allow update: if isOwner(userId) && isValidId(userId) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().tier == existing().tier &&
+                       incoming().deviceLimit == existing().deviceLimit &&
+                       isValidUserProfile(incoming(), userId) &&
+                       incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'activeThemeId', 'languageCode', 'updatedAt']);
+
+      allow delete: if isOwner(userId) && isValidId(userId);
+
+      match /devices/{deviceId} {
+        allow get: if isOwner(userId) && isValidId(deviceId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) && isValidId(deviceId) &&
+                         incoming().keys().hasAll(['userId', 'installUuid', 'deviceLabel', 'modelName', 'androidVersion', 'appVersion', 'status', 'createdAt', 'lastSyncAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'installUuid', 'deviceLabel', 'modelName', 'androidVersion', 'appVersion', 'status', 'createdAt', 'lastSyncAt', 'updatedAt']) &&
+                         incoming().status in ['ACTIVE', 'INACTIVE'] &&
+                         isValidDeviceRegistration(incoming(), userId);
+
+        allow update: if isOwner(userId) && isValidId(deviceId) &&
+                         existing().status != 'REVOKED' &&
+                         incoming().userId == existing().userId &&
+                         incoming().installUuid == existing().installUuid &&
+                         incoming().createdAt == existing().createdAt &&
+                         isValidDeviceRegistration(incoming(), userId) &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['deviceLabel', 'modelName', 'androidVersion', 'appVersion', 'status', 'lastSyncAt', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(deviceId) &&
+                         existing().status != 'REVOKED';
+      }
+
+      match /cloneConfigs/{configId} {
+        allow get: if isOwner(userId) && isValidId(configId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) && isValidId(configId) &&
+                         incoming().keys().hasAll(['userId', 'sourcePackage', 'targetPackage', 'sourceAppName', 'cloneName', 'iconPresetId', 'iconHueShift', 'changePackageName', 'hideFromLauncher', 'isolateData', 'strippedPermissionsCount', 'compatibilityStatus', 'buildStatus', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'sourcePackage', 'targetPackage', 'sourceAppName', 'cloneName', 'iconPresetId', 'iconHueShift', 'changePackageName', 'hideFromLauncher', 'isolateData', 'strippedPermissionsCount', 'compatibilityStatus', 'buildStatus', 'createdAt', 'updatedAt']) &&
+                         isValidCloneConfig(incoming(), userId);
+
+        allow update: if isOwner(userId) && isValidId(configId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().createdAt == existing().createdAt &&
+                         isValidCloneConfig(incoming(), userId) &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['targetPackage', 'cloneName', 'iconPresetId', 'iconHueShift', 'changePackageName', 'hideFromLauncher', 'isolateData', 'strippedPermissionsCount', 'compatibilityStatus', 'buildStatus', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(configId);
+      }
+
+      match /themePresets/{themeId} {
+        allow get: if isOwner(userId) && isValidId(themeId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) && isValidId(themeId) &&
+                         incoming().keys().hasAll(['userId', 'name', 'primaryHex', 'secondaryHex', 'surfaceHex', 'fontFamily', 'iconStyle', 'customTheme', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'name', 'primaryHex', 'secondaryHex', 'surfaceHex', 'fontFamily', 'iconStyle', 'customTheme', 'createdAt', 'updatedAt']) &&
+                         isValidThemePreset(incoming(), userId);
+
+        allow update: if isOwner(userId) && isValidId(themeId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().createdAt == existing().createdAt &&
+                         isValidThemePreset(incoming(), userId) &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['name', 'primaryHex', 'secondaryHex', 'surfaceHex', 'fontFamily', 'iconStyle', 'customTheme', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(themeId);
+      }
+
+      match /securityReports/{reportId} {
+        allow get: if isOwner(userId) && isValidId(reportId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) && isValidId(reportId) &&
+                         incoming().keys().hasAll(['userId', 'packageName', 'appName', 'riskScore', 'riskLevel', 'exportedComponentsCount', 'dangerousPermissionsCount', 'cleartextAllowed', 'debuggableFlag', 'certSha256Prefix', 'summary', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'packageName', 'appName', 'riskScore', 'riskLevel', 'exportedComponentsCount', 'dangerousPermissionsCount', 'cleartextAllowed', 'debuggableFlag', 'certSha256Prefix', 'summary', 'createdAt', 'updatedAt']) &&
+                         isValidSecurityReport(incoming(), userId);
+
+        allow update: if isOwner(userId) && isValidId(reportId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().createdAt == existing().createdAt &&
+                         isValidSecurityReport(incoming(), userId) &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['riskScore', 'riskLevel', 'exportedComponentsCount', 'dangerousPermissionsCount', 'cleartextAllowed', 'debuggableFlag', 'certSha256Prefix', 'summary', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(reportId);
+      }
+    }
+  }
+}

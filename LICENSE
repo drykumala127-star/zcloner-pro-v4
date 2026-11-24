@@ -1,0 +1,46 @@
+# DRAFT — MAIN LICENSE & DUAL-LICENSING NOTICE
+
+> **STATUS DOKUMEN: DRAFT — Kebijakan Tersinkron (`CP010J`)**  
+> *(Menunggu pembentukan riwayat Git baseline, peninjauan kode manusia, penyelesaian kewajiban atribusi in-app, dan tinjauan hukum final. Proyek saat ini **BELUM `LEGALLY CLEARED`** dan **BELUM `COMMERCIAL READY`**, serta modul kustom tanpa bukti penciptaan memadai tetap berstatus **`OWNERSHIP UNVERIFIED`**.)*
+
+Copyright (c) 2026 Dhedry Afriazoni. All Rights Reserved.
+
+---
+
+## 1. Pilihan Jalur Lisensi (Dual License Model)
+
+Karya perangkat lunak orisinal dalam ekosistem **Dhedry** (mencakup komponen orisinal **ZClone**, library **FMS Full Custom Ecosystem (`com.fms.*`)**, dan **FMSCloneEngine**) disediakan dalam **model Dual License** dengan ketentuan sebagai berikut:
+
+1. **Jalur Community License (`COMMUNITY-LICENSE.md`)**
+   - Tersedia sebagai *source-available* di GitHub dan APK gratis khusus untuk penggunaan **nonkomersial** oleh **individu pribadi, organisasi nirlaba (nonprofit), dan institusi akademik**.
+   - **Perusahaan atau entitas bisnis TIDAK otomatis memperoleh hak evaluasi** melalui jalur Community License. Evaluasi internal oleh perusahaan memerlukan **izin tertulis terpisah** dari Pemberi Lisensi atau menggunakan **Commercial License**.
+   - Donasi sukarela murni tanpa imbalan bisnis tidak otomatis dianggap komersial, sedangkan pekerjaan *freelancer* berbayar, proyek klien, atau sponsorship dengan manfaat promosi/bisnis termasuk ruang lingkup komersial (`COMMERCIAL-LICENSE.md`).
+2. **Jalur Commercial License (`COMMERCIAL-LICENSE.md`)**
+   - Wajib diperoleh secara tertulis untuk setiap penggunaan komersial, evaluasi perusahaan tanpa izin gratis khusus, pekerjaan *freelancer* berbayar/untuk klien, sponsorship komersial, distribusi APK berbayar/beriklan, OEM/enterprise bundling, atau integrasi source code ke produk komersial.
+   - **Pembelian atau pemberian lisensi tidak memindahkan kepemilikan hak cipta** dari Dhedry Afriazoni.
+
+**Pemisahan Lisensi APK dan Source Code**: Ketentuan atas biner APK terkompilasi (`EULA.md` / *Commercial APK License*) dan ketentuan atas kode sumber (`COMMUNITY-LICENSE.md` / *Commercial Source Code License*) dapat memiliki syarat yang berbeda dan berlaku sesuai objek yang digunakan.
+
+---
+
+## 2. Arah Kepemilikan Dhedry & Batas Ruang Lingkup Klaim
+
+Sepanjang didukung rantai bukti kepemilikan yang sah atas karya orisinal ciptaannya, **Dhedry Afriazoni** memegang dasar hak penuh atas komponen orisinal miliknya untuk:
+- Menggunakan dan menjalankan;
+- Mengubah, memperbaiki, dan mengembangkan;
+- Menggunakan ulang pada proyek lain;
+- Menggabungkan dan membuat produk turunan; serta
+- Menjual, melisensikan, dan mendistribusikan secara komersial.
+
+Meskipun demikian, lisensi dalam berkas ini **TIDAK** mengklaim kepemilikan eksklusif dan **TIDAK** mengubah ketentuan lisensi atas:
+1. **Komponen Google & Pihak Ketiga** (`THIRD-PARTY-NOTICES.md`): AndroidX, Jetpack Compose, Kotlin, Firebase SDK & Auth, Google Identity (`googleid`), Google Play Services/reCAPTCHA/Play Core/Play Integrity, gRPC/Protobuf/RE2J/Guava/Okio/Gson/Animal Sniffer, font Google Fonts (`SIL OFL 1.1`), serta tool pengujian (`JUnit`, `Robolectric`). Hak dan kewajiban lisensi/layanan pihak ketiga tetap berlaku penuh.
+2. **Platform, Toolchain & Layanan Cloud**: Android SDK, Gradle, AGP, OpenJDK, `debug.keystore`, dan layanan Google Cloud / Firebase SaaS.
+3. **Konsep Teknis Netral**: Bahasa pemrograman, sintaks, protokol standar, algoritma umum, pola desain umum, dan istilah teknis netral.
+4. **Komponen Belum Terverifikasi & Pengecualian Publik**: Modul kode dan aset vektor kustom yang saat ini belum memiliki riwayat Git/bukti penciptaan memadai dicatat sebagai **`OWNERSHIP UNVERIFIED`** (`IP-OWNERSHIP-REGISTER.md`), dan direktori referensi **`public/assets/aistudio/` dilarang dimasukkan ke distribusi publik** sebelum asal-usul dan hak penggunaannya dipastikan secara sah.
+
+---
+
+## 3. Hukum yang Berlaku & Penafian Garansi
+
+- **Hukum yang Berlaku**: Kebijakan dan ketentuan lisensi dalam ekosistem ini ditafsirkan dan diatur berdasarkan **Hukum Republik Indonesia**, sepanjang tidak bertentangan dengan ketentuan lisensi terbuka/SDK pihak ketiga atas komponen masing-masing pihak ketiga.
+- **Penafian Garansi (*Disclaimer*)**: KECUALI DINYATAKAN LAIN SECARA TERTULIS DALAM PERJANJIAN KOMERSIAL RESMI, PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA" (*AS IS*), TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN TERSIRAT, TERMASUK NAMUN TIDAK TERBATAS PADA JAMINAN KELAYAKAN JUAL, KESESUAIAN UNTUK TUJUAN TERTENTU, DAN KETIDAKLANGGARAN HAK PIHAK KETIGA.

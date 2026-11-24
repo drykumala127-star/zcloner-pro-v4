@@ -1,0 +1,6 @@
+{
+  "name": "ZCloner PRO",
+  "description": "Aplikasi inspeksi, kustomisasi, repackaging, dan manajemen APK Android berbasis FMS Engine Core V1 dengan Cloud Sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

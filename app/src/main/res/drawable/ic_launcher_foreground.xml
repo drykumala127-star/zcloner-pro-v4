@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Back cloned instance layer (within 66dp adaptive safe zone) -->
+    <path
+        android:fillColor="#6D28D9"
+        android:pathData="M45,35 H69 A9,9 0 0,1 78,44 V68 A9,9 0 0,1 69,77 H45 A9,9 0 0,1 36,68 V44 A9,9 0 0,1 45,35 Z"
+        android:strokeColor="#C084FC"
+        android:strokeWidth="1.6" />
+
+    <!-- Front primary ZClone engine plate -->
+    <path
+        android:fillColor="#091532"
+        android:pathData="M37,29 H61 A9,9 0 0,1 70,38 V62 A9,9 0 0,1 61,71 H37 A9,9 0 0,1 28,62 V38 A9,9 0 0,1 37,29 Z"
+        android:strokeColor="#00D2FF"
+        android:strokeWidth="2.6" />
+
+    <!-- Inner technical highlight frame -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M38.5,33 H59.5 A5.5,5.5 0 0,1 65,38.5 V61.5 A5.5,5.5 0 0,1 59.5,67 H38.5 A5.5,5.5 0 0,1 33,61.5 V38.5 A5.5,5.5 0 0,1 38.5,33 Z"
+        android:strokeAlpha="0.28"
+        android:strokeColor="#38BDF8"
+        android:strokeWidth="0.9" />
+
+    <!-- Original geometric Z monogram -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M38,39 H60 V44.5 L46.2,55.5 H60 V61 H38 V55.5 L51.8,44.5 H38 Z" />
+
+    <!-- Active clone instance telemetry node -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M74,34 A4.2,4.2 0 1,1 73.99,34 Z"
+        android:strokeColor="#070B19"
+        android:strokeWidth="1.2" />
+</vector>

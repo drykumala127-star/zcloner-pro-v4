@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="260dp"
+    android:height="200dp"
+    android:viewportWidth="260"
+    android:viewportHeight="200">
+
+    <!-- Midnight glassmorphic card backdrop -->
+    <path
+        android:fillColor="#060D21"
+        android:pathData="M0,0 H260 V200 H0 Z" />
+    <path
+        android:fillColor="#0B1838"
+        android:pathData="M0,0 H260 V116 L0,172 Z" />
+
+    <!-- Subtle radial glow & technical circuit lines -->
+    <path
+        android:fillAlpha="0.16"
+        android:fillColor="#7C3AED"
+        android:pathData="M196,138 A68,68 0 1,1 195.99,138 Z" />
+    <path
+        android:fillAlpha="0.14"
+        android:fillColor="#00D2FF"
+        android:pathData="M82,78 A62,62 0 1,1 81.99,78 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M18,32 H242 M18,168 H242 M38,16 V184 M222,16 V184"
+        android:strokeAlpha="0.12"
+        android:strokeColor="#38BDF8"
+        android:strokeWidth="1" />
+
+    <!-- Layer 3 (Back): Target Repackaged Clone Container -->
+    <path
+        android:fillAlpha="0.88"
+        android:fillColor="#1E1148"
+        android:pathData="M100,66 H204 A14,14 0 0,1 218,80 V156 A14,14 0 0,1 204,170 H100 A14,14 0 0,1 86,156 V80 A14,14 0 0,1 100,66 Z"
+        android:strokeColor="#A855F7"
+        android:strokeWidth="1.8" />
+
+    <!-- Layer 2 (Middle): AXML Manifest & Permission Layer -->
+    <path
+        android:fillAlpha="0.92"
+        android:fillColor="#0D224D"
+        android:pathData="M72,48 H176 A14,14 0 0,1 190,62 V138 A14,14 0 0,1 176,152 H72 A14,14 0 0,1 58,138 V62 A14,14 0 0,1 72,48 Z"
+        android:strokeColor="#38BDF8"
+        android:strokeWidth="1.8" />
+
+    <!-- Layer 1 (Front): FMSCloneEngine Primary Workspace Card -->
+    <path
+        android:fillColor="#08142E"
+        android:pathData="M44,30 H148 A14,14 0 0,1 162,44 V120 A14,14 0 0,1 148,134 H44 A14,14 0 0,1 30,120 V44 A14,14 0 0,1 44,30 Z"
+        android:strokeColor="#00D2FF"
+        android:strokeWidth="2.4" />
+
+    <!-- Engine medallion & Z mark inside front layer -->
+    <path
+        android:fillAlpha="0.16"
+        android:fillColor="#00D2FF"
+        android:pathData="M96,48 A26,26 0 1,1 95.99,48 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M96,48 A26,26 0 1,1 95.99,48 Z"
+        android:strokeColor="#00D2FF"
+        android:strokeWidth="1.8" />
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M82,61 H110 V67.5 L92,80.5 H110 V87 H82 V80.5 L100,67.5 H82 Z" />
+
+    <!-- Technical status bars on front card -->
+    <path
+        android:fillAlpha="0.8"
+        android:fillColor="#38BDF8"
+        android:pathData="M56,110 H108 A3,3 0 0,1 111,113 A3,3 0 0,1 108,116 H56 A3,3 0 0,1 53,113 A3,3 0 0,1 56,110 Z" />
+    <path
+        android:fillAlpha="0.55"
+        android:fillColor="#A855F7"
+        android:pathData="M119,110 H136 A3,3 0 0,1 139,113 A3,3 0 0,1 136,116 H119 A3,3 0 0,1 116,113 A3,3 0 0,1 119,110 Z" />
+
+    <!-- Local PKCS#7 verification shield badge -->
+    <path
+        android:fillColor="#064E3B"
+        android:pathData="M204,34 L222,40 V54 C222,65 213,73 204,77 C195,73 186,65 186,54 V40 Z"
+        android:strokeColor="#10B981"
+        android:strokeWidth="2" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M196,55 L202,61 L213,49"
+        android:strokeColor="#34D399"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.8" />
+
+    <!-- Connector dots between clone layers -->
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M168,86 L186,86 M192,108 L210,108"
+        android:strokeAlpha="0.7"
+        android:strokeColor="#00D2FF"
+        android:strokeLineCap="round"
+        android:strokeWidth="2" />
+</vector>

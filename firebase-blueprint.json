@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated ZClone user preferences and license summary.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID of the owner." },
+        "displayName": { "type": "string", "description": "User display name." },
+        "tier": { "type": "string", "enum": ["FREE", "PREMIUM", "ULTRA"], "description": "Server-controlled license tier." },
+        "deviceLimit": { "type": "integer", "description": "Maximum allowed active devices for the tier." },
+        "activeThemeId": { "type": "string", "description": "Currently selected FMSThemeEngine preset ID." },
+        "languageCode": { "type": "string", "enum": ["id", "en"], "description": "Preferred UI language code." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp on creation." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp on update." }
+      },
+      "required": ["userId", "displayName", "tier", "deviceLimit", "activeThemeId", "languageCode", "createdAt", "updatedAt"]
+    },
+    "DeviceRegistration": {
+      "title": "DeviceRegistration",
+      "description": "Registered ZClone installation using a random installation UUID (no restricted hardware IDs).",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "installUuid": { "type": "string" },
+        "deviceLabel": { "type": "string" },
+        "modelName": { "type": "string" },
+        "androidVersion": { "type": "string" },
+        "appVersion": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "REVOKED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastSyncAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "installUuid", "deviceLabel", "modelName", "androidVersion", "appVersion", "status", "createdAt", "lastSyncAt", "updatedAt"]
+    },
+    "CloneConfig": {
+      "title": "CloneConfig",
+      "description": "Synchronized APK clone recipe and compatibility metadata.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "sourcePackage": { "type": "string" },
+        "targetPackage": { "type": "string" },
+        "sourceAppName": { "type": "string" },
+        "cloneName": { "type": "string" },
+        "iconPresetId": { "type": "string" },
+        "iconHueShift": { "type": "integer" },
+        "changePackageName": { "type": "boolean" },
+        "hideFromLauncher": { "type": "boolean" },
+        "isolateData": { "type": "boolean" },
+        "strippedPermissionsCount": { "type": "integer" },
+        "compatibilityStatus": { "type": "string", "enum": ["VERIFIED", "COMPATIBLE", "LIMITED", "UNSUPPORTED"] },
+        "buildStatus": { "type": "string", "enum": ["SAVED", "BUILT", "EXPORTED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "sourcePackage", "targetPackage", "sourceAppName", "cloneName", "iconPresetId", "iconHueShift", "changePackageName", "hideFromLauncher", "isolateData", "strippedPermissionsCount", "compatibilityStatus", "buildStatus", "createdAt", "updatedAt"]
+    },
+    "ThemePreset": {
+      "title": "ThemePreset",
+      "description": "Synchronized FMSThemeStudio theme preset.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "primaryHex": { "type": "string" },
+        "secondaryHex": { "type": "string" },
+        "surfaceHex": { "type": "string" },
+        "fontFamily": { "type": "string", "enum": ["SPACE_GROTESK", "PLUS_JAKARTA_SANS", "JETBRAINS_MONO"] },
+        "iconStyle": { "type": "string", "enum": ["ROUNDED", "SQUIRCLE", "NEON_RING"] },
+        "customTheme": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "primaryHex", "secondaryHex", "surfaceHex", "fontFamily", "iconStyle", "customTheme", "createdAt", "updatedAt"]
+    },
+    "SecurityReport": {
+      "title": "SecurityReport",
+      "description": "APK static security scan summary.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "packageName": { "type": "string" },
+        "appName": { "type": "string" },
+        "riskScore": { "type": "integer" },
+        "riskLevel": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
+        "exportedComponentsCount": { "type": "integer" },
+        "dangerousPermissionsCount": { "type": "integer" },
+        "cleartextAllowed": { "type": "boolean" },
+        "debuggableFlag": { "type": "boolean" },
+        "certSha256Prefix": { "type": "string" },
+        "summary": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "packageName", "appName", "riskScore", "riskLevel", "exportedComponentsCount", "dangerousPermissionsCount", "cleartextAllowed", "debuggableFlag", "certSha256Prefix", "summary", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile and non-privileged preferences."
+    },
+    "/users/{userId}/devices/{deviceId}": {
+      "schema": { "$ref": "#/entities/DeviceRegistration" },
+      "description": "Registered active device installations per user."
+    },
+    "/users/{userId}/cloneConfigs/{configId}": {
+      "schema": { "$ref": "#/entities/CloneConfig" },
+      "description": "Saved APK clone configurations per user."
+    },
+    "/users/{userId}/themePresets/{themeId}": {
+      "schema": { "$ref": "#/entities/ThemePreset" },
+      "description": "Custom and synced FMSThemeStudio presets per user."
+    },
+    "/users/{userId}/securityReports/{reportId}": {
+      "schema": { "$ref": "#/entities/SecurityReport" },
+      "description": "Static APK security scan summaries per user."
+    }
+  }
+}

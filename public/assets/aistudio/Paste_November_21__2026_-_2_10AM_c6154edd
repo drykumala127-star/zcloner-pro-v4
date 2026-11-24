@@ -1,0 +1,1582 @@
+ZCLONE & FMS FULL CUSTOM ECOSYSTEM
+
+MASTER SPECIFICATION, CP000 AUDIT REPORT & IMPLEMENTATION PLAN
+
+Project: ZClone
+Core Product Engine: FMSCloneEngine
+Framework Ecosystem: FMS Full Custom Ecosystem
+Architecture: Independent, Modular, Reusable, API-First
+Initial Platform: Android
+Primary Language: Kotlin
+UI Language: Indonesian with English Technical Terms
+Initial UI Theme: Dark Neon Obsidian / Midnight Indigo
+Initial Execution Mode: AUDIT AND PLANNING ONLY
+Document Status: DRAFT FOR USER REVIEW
+Implementation Approval: NOT GRANTED
+
+---
+
+PART I — GOVERNING PROJECT PRINCIPLES
+
+1. Master Objective
+
+Build ZClone as an independent Android APK inspection, customization, repackaging, and management application powered by FMSCloneEngine.
+
+Build FMS as an independent and reusable software library ecosystem that can serve multiple applications and projects.
+
+ZClone is one consumer of FMS. FMS must not be architecturally restricted to ZClone.
+
+The project must provide real, testable functionality rather than UI-only demonstrations, dummy controls, or unsupported compatibility claims.
+
+2. Non-Negotiable Principles
+
+1. Preserve existing verified work.
+2. Inspect the actual workspace before modifying anything.
+3. Do not assume unavailable files, repositories, credentials, or cloud access.
+4. Do not rebuild an existing project unnecessarily.
+5. Use patch-only changes when an existing implementation is available and suitable.
+6. Do not claim implementation or verification without evidence.
+7. Do not silently omit documented features.
+8. Do not use a third-party cloning engine as the core.
+9. Develop independent FMS APIs, namespaces, and implementations.
+10. External dependencies are allowed only as audited supporting components.
+11. Respect Android platform security, application licensing, DRM, and access controls.
+12. Maintain source-code security throughout the complete lifecycle.
+13. Do not start implementation before explicit user approval.
+
+3. Project Boundaries
+
+Separate the architecture into:
+
+- FMS Shared Ecosystem: reusable across projects.
+- FMSCloneEngine: specialized APK processing engine.
+- ZClone Application: user-facing product.
+- Cloud Infrastructure: optional authentication, synchronization, and trusted backend services.
+- Android Native Platform: official system APIs and platform foundations.
+
+Generic FMS libraries must not depend on ZClone-specific classes or application logic.
+
+---
+
+PART II — USER REVIEW AND ARCHITECTURAL DECISIONS
+
+4. Confirmed Decisions
+
+Decision 1 — Project Foundation
+
+The supplied CP000 report describes the current workspace as a clean Android template.
+
+This is a reported workspace condition, not an independently verified finding in this document.
+
+The actual workspace must be inspected before implementation.
+
+If the current workspace is still a basic Compose template, preserve its useful build configuration while evaluating the transition to the FMS custom UI architecture.
+
+No previous ZIP, checkpoint, or GitHub repository is assumed to exist unless actually discovered in the workspace or explicitly provided.
+
+Decision 2 — FMS Full Custom Ecosystem
+
+FMS is an independent, reusable library ecosystem.
+
+Core AndroidX frameworks and libraries must not be mandatory FMS implementation frameworks.
+
+The following custom FMS replacements are required:
+
+Existing framework| FMS implementation
+Jetpack Compose| FMSUIEngine
+Material 3| FMSDesignSystem
+Room| FMSDatabaseEngine
+DataStore| FMSPreferenceEngine
+WorkManager| FMSBackgroundEngine
+Navigation Compose| FMSNavigationEngine
+AndroidX Security Crypto| FMSSecurityStorage
+
+The FMS implementations may use official Android SDK APIs and audited supporting libraries.
+
+Do not merely rename third-party libraries. FMS must contain independently implemented logic and documented APIs.
+
+Decision 3 — FMSCloneEngine Approach
+
+Use a real APK inspection, manifest processing, icon customization, repackaging, and signing architecture for standard unrooted Android devices.
+
+Core components:
+
+- APK Inspector
+- Binary AndroidManifest Parser
+- Binary Manifest Editor
+- Icon Patcher
+- Resource Inspector
+- APK Repackager
+- APK Signature Manager
+- Local APK Signer
+- Compatibility Analyzer
+- Security Scanner
+
+Decision 4 — Persistence and Cloud Sync
+
+Use a Local-First architecture.
+
+Local storage:
+
+- FMSDatabaseEngine
+- FMSPreferenceEngine
+- FMSStorageEngine
+
+Cloud services:
+
+- Firebase Authentication
+- Google Sign-In through Android Credential Manager integration
+- Cloud Firestore
+- Firebase App Check
+- Trusted backend services for sensitive enforcement operations
+
+Cloud synchronization is optional. Core local functionality must remain available without internet.
+
+Decision 5 — Interface Language
+
+Default language: Indonesian with standard English technical terminology.
+
+English localization must also be supported.
+
+All UI strings must use localization resources rather than hardcoded text.
+
+Decision 6 — Visual Identity
+
+ZClone uses Dark Neon Obsidian / Midnight Indigo.
+
+Main colors:
+
+- Deep Midnight: #070B19
+- Card Surface: #11182E
+- Subtle Border: #24325B
+- Electric Cyan: #00D2FF
+- Royal Blue: #3A7BD5
+- Neon Violet: #8B5CF6
+- Success Emerald: #10B981
+- Premium Amber: #F59E0B
+
+The visual design must be implemented through FMSThemeEngine and FMSDesignSystem.
+
+Decision 7 — Android Compatibility and Security
+
+ZClone targets standard non-root Android devices.
+
+The application must not:
+
+- Bypass DRM.
+- Bypass application authentication.
+- Bypass application licensing.
+- Bypass Play Integrity.
+- Spoof protected hardware identifiers.
+- Falsify Android device capabilities.
+- Circumvent Android application sandboxing.
+- Claim universal APK compatibility.
+
+Applications that rely on certificate pinning, signing-certificate validation, Play Integrity, protected server authentication, or other security controls may be marked LIMITED or UNSUPPORTED.
+
+---
+
+PART III — FMS FULL CUSTOM ECOSYSTEM
+
+5. FMS Identity
+
+Official ecosystem name: FMS Full Custom Ecosystem.
+
+Proposed framework namespace: com.fms.
+
+Primary language: Kotlin.
+
+Initial platform: Android.
+
+Architecture:
+
+- Modular.
+- Reusable.
+- API-first.
+- Independently testable.
+- Independently versionable.
+- Security-first.
+
+The proposed namespace must be checked against existing project source before adoption.
+
+6. FMS Core Framework
+
+Required libraries:
+
+- FMSCore
+- FMSRuntime
+- FMSModuleSystem
+- FMSEventEngine
+- FMSDependencyEngine
+- FMSPluginEngine
+- FMSLifecycle
+- FMSConfiguration
+- FMSLogging
+- FMSErrorEngine
+
+Responsibilities:
+
+- Core module contracts.
+- Runtime initialization.
+- Module registration.
+- Internal event communication.
+- Dependency resolution.
+- Lifecycle management.
+- Configuration management.
+- Structured logging.
+- Error handling.
+
+7. FMS UI Framework
+
+Required libraries:
+
+- FMSUIEngine
+- FMSRenderingEngine
+- FMSWidgetEngine
+- FMSDesignSystem
+- FMSLayoutEngine
+- FMSNavigationEngine
+- FMSAnimationEngine
+- FMSThemeEngine
+- FMSAutoTheme
+- FMSThemeStudio
+- FMSDynamicUI
+- FMSAccessibility
+
+Responsibilities:
+
+- UI rendering.
+- Layout management.
+- Reusable visual components.
+- Theme management.
+- Dynamic interface updates.
+- Responsive screen adaptation.
+- Accessibility.
+- Animation and transitions.
+
+FMSUIEngine may use Android native View, Canvas, drawing, and other official Android APIs as rendering foundations.
+
+Do not claim that FMS replaces the Android operating system or its native rendering infrastructure.
+
+8. FMS Data Framework
+
+Required libraries:
+
+- FMSDatabaseEngine
+- FMSQueryEngine
+- FMSPreferenceEngine
+- FMSStorageEngine
+- FMSCacheEngine
+- FMSBackupEngine
+- FMSSyncEngine
+- FMSMigrationEngine
+- FMSSerialization
+
+Responsibilities:
+
+- Local database.
+- Query execution.
+- User preferences.
+- File management.
+- Caching.
+- Backup and restore.
+- Data synchronization.
+- Schema migration.
+- Serialization.
+
+SQLite through Android platform APIs is an approved database foundation.
+
+9. FMS Task Framework
+
+Required libraries:
+
+- FMSBackgroundEngine
+- FMSTaskScheduler
+- FMSJobQueue
+- FMSProcessMonitor
+- FMSNotificationEngine
+- FMSRecoveryEngine
+- FMSConcurrency
+
+Responsibilities:
+
+- Background task execution.
+- Job scheduling.
+- Task queue management.
+- Process monitoring.
+- Notifications.
+- Retry and recovery.
+- Concurrency management.
+
+All background execution must respect Android background restrictions, lifecycle rules, and battery optimization policies.
+
+10. FMS Security Framework
+
+Required libraries:
+
+- FMSSecurityEngine
+- FMSSecurityStorage
+- FMSKeyManager
+- FMSAccessControl
+- FMSIntegrityEngine
+- FMSAuditEngine
+- FMSPrivacyEngine
+- FMSCryptoAdapter
+- FMSNetworkSecurity
+
+Responsibilities:
+
+- Secure data storage.
+- Key management.
+- Access control.
+- Integrity validation.
+- Audit logging.
+- Privacy protection.
+- Cryptographic integration.
+- Network security.
+
+Cryptographic primitives must use established, reviewed implementations.
+
+FMS must not invent custom encryption algorithms.
+
+Android Keystore is an approved platform foundation.
+
+11. FMS Network and Cloud Framework
+
+Required libraries:
+
+- FMSNetworkEngine
+- FMSHttpClient
+- FMSApiEngine
+- FMSCloudEngine
+- FMSAuthEngine
+- FMSCloudSync
+- FMSConnectivity
+
+Responsibilities:
+
+- Network communication.
+- HTTP requests.
+- API integration.
+- Cloud providers.
+- Authentication adapters.
+- Data synchronization.
+- Connectivity monitoring.
+
+Firebase is a supporting cloud provider, not a mandatory dependency of the entire FMS ecosystem.
+
+12. FMS Developer Tools
+
+Required libraries:
+
+- FMSTestEngine
+- FMSDiagnostics
+- FMSProfiler
+- FMSInspector
+- FMSBuildTools
+- FMSCodeAnalyzer
+- FMSDependencyAudit
+
+Responsibilities:
+
+- Automated tests.
+- Diagnostics.
+- Performance profiling.
+- Inspection.
+- Build integration.
+- Static code analysis.
+- Dependency and license audits.
+
+13. Product-Specific FMS Modules
+
+These modules are not required by every application:
+
+- FMSCloneEngine
+- FMSMediaEngine
+- FMSAPKStudioEngine
+- FMSDocumentEngine
+
+Each product-specific module must depend on shared FMS APIs rather than introducing reverse dependencies into FMS Core.
+
+---
+
+PART IV — ZCLONE PRODUCT SPECIFICATION
+
+14. ZClone Product Objective
+
+ZClone is an Android application for:
+
+- APK inspection.
+- APK manifest analysis.
+- Application customization.
+- Icon customization.
+- Package configuration.
+- APK repackaging.
+- Local signing.
+- Security scanning.
+- Clone configuration management.
+- Device management.
+- Cloud synchronization.
+- Theme customization.
+- Backup and restore.
+
+The application must clearly distinguish supported, limited, blocked, and unsupported operations.
+
+15. User Experience and Main Screens
+
+15.1 Splash and Authentication
+
+- ZClone branding.
+- Clone · Customize · Manage tagline.
+- Powered by FMSCloneEngine.
+- Google Sign-In.
+- Credential Manager integration.
+- Secure session management.
+- Optional local-only mode if explicitly supported by the authentication architecture.
+
+Authentication must not expose secrets or tokens in logs.
+
+15.2 Dashboard
+
+Display:
+
+- ZClone branding.
+- User tier.
+- Settings shortcut.
+- Hero card: Buat Klon Sempurnamu.
+- Clone Apps.
+- My Clones.
+- Theme Studio.
+- Device Manager.
+- Security Scanner.
+- Auto Theme.
+- Batch Clone.
+- Backup & Restore.
+- Cloud Sync.
+
+Bottom navigation:
+
+- Beranda.
+- Pustaka.
+- Alat.
+- Pengaturan.
+
+15.3 Clone Apps
+
+Tabs:
+
+- Installed Applications.
+- System Applications where permitted.
+- Import APK.
+
+Requirements:
+
+- Application search.
+- Application metadata.
+- Multi-select.
+- Selection count.
+- Single Clone.
+- Batch Clone.
+- Permission visibility.
+- APK source inspection.
+
+Installed application visibility must comply with Android package visibility requirements.
+
+Use narrowly scoped package visibility declarations when possible.
+
+Do not request QUERY_ALL_PACKAGES without documented necessity and policy review.
+
+15.4 Application Configuration
+
+Features:
+
+- Original icon preview.
+- Clone display name.
+- Target package name.
+- Icon customization.
+- Package name modification where technically feasible.
+- Permission analysis and configuration.
+- Advanced settings.
+- Compatibility report.
+- Security warnings.
+- Clone configuration save.
+- Build APK.
+- Export APK.
+- User-confirmed installation.
+
+Every advanced option must have an explicit feature status.
+
+15.5 My Clones Library
+
+Features:
+
+- Saved clone configurations.
+- Build history.
+- Export history.
+- Compatibility status.
+- Rebuild configuration.
+- Delete configuration.
+- Backup and restore.
+- Cloud synchronization.
+
+Do not assume that every modified APK can be installed or updated as a normal update.
+
+15.6 Theme Studio
+
+Tabs:
+
+- Theme.
+- Colors.
+- Fonts.
+- Icons.
+
+Initial presets:
+
+- Dark Neon.
+- Light Blue.
+- Purple Dream.
+- Green Nature.
+- Sunset.
+- Custom.
+
+Requirements:
+
+- Live preview.
+- Theme application.
+- Color editing.
+- Font selection.
+- Icon customization.
+- Theme import and export.
+- Responsive UI.
+
+15.7 Device Manager
+
+Display:
+
+- Registered device installations.
+- Model information where available.
+- Android version.
+- Registration status.
+- Last synchronization time.
+- Device quota.
+- Session management.
+
+Do not collect protected hardware identifiers.
+
+Use random installation identifiers rather than IMEI, serial numbers, or other restricted hardware identifiers.
+
+15.8 Security Scanner
+
+Analyze available APK metadata:
+
+- APK signature and certificate information.
+- Risky permissions.
+- Exported components.
+- Cleartext traffic configuration.
+- Debuggable configuration.
+- Manifest configuration.
+- Package metadata.
+- Known structural risks.
+
+Security Scanner must clearly state its limitations.
+
+A manifest scanner must not claim to detect every malware family or prove that an APK is safe.
+
+15.9 FMSCloneEngine Hub
+
+Display:
+
+- Engine version.
+- Module status.
+- Compatibility.
+- Supported capabilities.
+- Known limitations.
+- Feature Parity Matrix.
+- Security and diagnostic information.
+
+15.10 Settings, Backup and Packages
+
+Include:
+
+- Application version.
+- Language.
+- Theme.
+- Security and privacy.
+- App permissions.
+- Backup and restore.
+- Cloud synchronization.
+- License and package information.
+- Update information.
+
+JSON backup import must validate schema, file size, and contents before applying data.
+
+---
+
+PART V — FMSCLONEENGINE TECHNICAL ARCHITECTURE
+
+16. Core Engine Modules
+
+FMSCloneEngine
+
+Orchestrates:
+
+- Inspection.
+- Configuration.
+- Compatibility checks.
+- APK transformation.
+- Repackaging.
+- Signing.
+- Validation.
+
+FMSAPKInspector
+
+Inspect:
+
+- APK archive structure.
+- Manifest.
+- Application metadata.
+- Package name.
+- Version.
+- Permissions.
+- Components.
+- Resources.
+- Signatures.
+- Split APK indicators.
+
+FMSManifestEngine
+
+Provide:
+
+- Binary AXML parser.
+- String pool parser.
+- Manifest tree model.
+- Manifest validator.
+- Binary AXML serializer.
+- Controlled manifest editing.
+
+Manifest changes must preserve structural correctness.
+
+FMSIconEngine
+
+Provide:
+
+- Raster icon inspection.
+- Adaptive icon inspection.
+- Icon customization.
+- Resource replacement.
+- Resource integrity validation.
+
+FMSResourceEngine
+
+Inspect and process supported resource formats.
+
+Do not claim support for every Android resource format until verified.
+
+FMSRepackager
+
+Provide:
+
+- Controlled archive extraction.
+- Resource transformation.
+- Manifest transformation.
+- Repackaging.
+- ZIP integrity validation.
+
+FMSSignatureManager
+
+Provide:
+
+- Signature inspection.
+- Certificate metadata.
+- SHA-256 fingerprint.
+- Local signing.
+- Signature verification.
+
+The user must control their signing credentials.
+
+Never package private signing keys in the application or distribution ZIP.
+
+FMSCompatibilityEngine
+
+Analyze:
+
+- Android version requirements.
+- APK structure.
+- Split APK status.
+- Native library architecture.
+- Package dependencies.
+- Signature requirements.
+- Known incompatibilities.
+
+FMSSecurityScanner
+
+Provide static security analysis of available APK contents and metadata.
+
+All findings must be evidence-based and include severity, explanation, and limitations.
+
+17. Non-Root Android Technical Limitations
+
+Repackaging an APK with a different package name does not guarantee that every application will run.
+
+Potential blockers:
+
+- Hardcoded package references.
+- Native library assumptions.
+- Signature verification.
+- Certificate pinning.
+- Play Integrity.
+- Server-side license validation.
+- Split APK dependencies.
+- Dynamic feature modules.
+- Resource references.
+- Shared UID requirements.
+- Protected system permissions.
+
+The application must not bypass security controls to force compatibility.
+
+Repackaged APKs require signing with an appropriate key.
+
+Re-signing changes the original signing identity and can break update compatibility or application trust relationships.
+
+The system installer must handle installation with user confirmation.
+
+Do not promise silent installation on ordinary unrooted devices.
+
+18. Split APK and App Bundle Handling
+
+Detect split APK configurations.
+
+Determine whether:
+
+- A standalone APK is available.
+- Base and configuration splits are present.
+- Required dynamic features exist.
+- Repackaging is technically supported.
+
+Unsupported combinations must be reported rather than silently processed.
+
+19. Isolated Data Clarification
+
+Changing the target package name normally gives the installed package a separate Android application sandbox.
+
+This does not guarantee complete functional isolation.
+
+Application behavior may still depend on:
+
+- Account services.
+- External storage.
+- Shared content providers.
+- Backend identity.
+- Signature validation.
+- Android inter-process communication.
+
+Do not claim universal multi-account isolation.
+
+---
+
+PART VI — USER DATA, LOCAL STORAGE AND CLOUD SYNC
+
+20. Local-First Architecture
+
+Use:
+
+- FMSDatabaseEngine for structured local records.
+- FMSPreferenceEngine for application preferences.
+- FMSStorageEngine for user-selected files and backups.
+- FMSCacheEngine for temporary cache.
+- FMSSecurityStorage for sensitive local data.
+
+The initial ZClone architecture must not use Room or DataStore as mandatory core frameworks.
+
+SQLite and Android native storage APIs may be used as foundations.
+
+21. Firebase Authentication
+
+Use:
+
+- Firebase Authentication.
+- Google Sign-In.
+- Android Credential Manager integration.
+- Secure session handling.
+- Account state validation.
+
+Do not log authentication tokens.
+
+Do not ask users to paste private API keys or credentials into source code.
+
+22. Firestore Data Model
+
+Proposed structure:
+
+users/{userId}
+
+- profile
+- license
+- cloneConfigurations
+- themePresets
+- deviceRegistry
+- securityReports
+- syncMetadata
+
+All user records must be isolated by authenticated UID.
+
+Firestore Security Rules must validate:
+
+- Authenticated identity.
+- Ownership.
+- Allowed fields.
+- Data types.
+- Document size.
+- Permitted operations.
+
+Client-side rules alone must not be trusted for privileged license enforcement or device quota enforcement.
+
+Use trusted backend verification for sensitive enforcement operations.
+
+23. Device Registry
+
+Store only necessary device metadata:
+
+- Random installation UUID.
+- User-controlled device label.
+- Available model information.
+- Android version.
+- Registration time.
+- Last synchronization.
+- Session status.
+
+Do not store restricted hardware identifiers.
+
+A random installation UUID is not guaranteed to remain stable after application data removal or reinstall.
+
+24. Cloud Synchronization
+
+Synchronize:
+
+- Clone configuration metadata.
+- Theme presets.
+- User preferences where appropriate.
+- Device registration metadata.
+- Security scan summaries.
+
+Do not upload complete APK files or sensitive application contents by default.
+
+Provide:
+
+- Offline mode.
+- Retry handling.
+- Conflict detection.
+- Conflict resolution.
+- Sync state.
+- User-controlled backup and restore.
+- Account deletion and data deletion workflow.
+
+Security reports must not contain unnecessary private data.
+
+25. Firebase App Check and Backend Security
+
+Use Firebase App Check where supported.
+
+Use trusted backend services for:
+
+- License validation.
+- Device quota enforcement.
+- Privileged operations.
+- Server-side consistency checks.
+
+Never trust client-supplied tier or device-limit values.
+
+---
+
+PART VII — COMPLETE FEATURE PARITY SPECIFICATION
+
+26. Official App Cloner Feature Inventory
+
+The project must audit the currently available official public documentation and feature catalog of App Cloner before freezing the parity inventory.
+
+Include individual documented features across:
+
+- Free.
+- Premium.
+- Ultra.
+- Ultra+.
+- Ultra++.
+- Add-ons.
+- Packages.
+- Extensions.
+
+Do not infer features from names alone.
+
+Record source URLs and audit dates.
+
+Each individually documented option must have its own Feature Parity Matrix record.
+
+27. Required Feature Parity Matrix Fields
+
+Every feature record must include:
+
+- Feature ID.
+- Feature name.
+- Official source category.
+- Official source URL.
+- Description.
+- Proposed FMS module.
+- Proposed API.
+- Android requirements.
+- Required permissions.
+- External dependencies.
+- Security implications.
+- Technical limitations.
+- Test scenarios.
+- Acceptance criteria.
+- Current implementation status.
+- Evidence.
+
+Allowed statuses:
+
+- NOT AUDITED
+- PLANNED
+- IMPLEMENTED
+- TESTED
+- VERIFIED
+- LIMITED
+- UNSUPPORTED
+- BLOCKED
+
+No category is complete while individual documented features remain unrecorded.
+
+28. ZClone Exclusive Features
+
+Include the following:
+
+1. Smart Compatibility.
+2. Clone Time Machine.
+3. Version Diff.
+4. Migration.
+5. Smart Update.
+6. Privacy Policy Engine.
+7. Visual Automation.
+8. Crash Intelligence.
+9. Reproducible Builder.
+10. APK Dependency Graph.
+11. Multi-Profile Workspace.
+12. Batch Orchestrator.
+13. Security Scanner.
+14. Visual Resource Studio.
+15. Offline Clone Lab.
+16. Extension SDK.
+17. Auto Theme Engine.
+18. UI Customization Studio.
+19. Live Preview.
+20. Theme Import/Export.
+21. Device Management.
+22. Device License Manager.
+
+Every exclusive feature requires its own specification and acceptance criteria.
+
+29. Unsupported and Unsafe Features
+
+Features that require root, privileged access, unsupported Android internals, protected hardware spoofing, DRM bypass, or security circumvention must be clearly documented.
+
+Do not silently omit them.
+
+Provide a technically safe alternative where possible.
+
+---
+
+PART VIII — SECURITY AND SOURCE CODE PROTECTION
+
+30. Mandatory Security Requirements
+
+Apply security controls throughout audit, development, testing, packaging, release, and maintenance.
+
+Secrets
+
+- No hardcoded API keys.
+- No hardcoded passwords.
+- No private signing keys in source.
+- No credentials in logs.
+- No committed secret-filled .env files.
+
+Authentication and Access
+
+- Secure authentication.
+- Strict authorization.
+- Least privilege.
+- Input validation.
+- Secure session handling.
+
+Android Security
+
+- Secure exported component configuration.
+- Intent validation.
+- Secure IPC.
+- Safe FileProvider configuration.
+- URI permission validation.
+- Secure file processing.
+- No unnecessary permissions.
+
+Data Security
+
+- Encrypt sensitive data where appropriate.
+- Use Android Keystore.
+- Validate backup imports.
+- Protect local configuration.
+- Protect synchronization data.
+
+Supply Chain
+
+- Dependency inventory.
+- License audit.
+- Vulnerability scan.
+- Transitive dependency audit.
+- Suspicious-code review.
+
+Build and Release
+
+- Source integrity.
+- Build reproducibility where feasible.
+- APK integrity checks.
+- ZIP integrity checks.
+- Signing verification.
+- Security regression tests.
+
+No release with unresolved critical security findings.
+
+---
+
+PART IX — VISUAL AND UI IMPLEMENTATION
+
+31. Design System
+
+FMSDesignSystem and FMSThemeEngine must implement the approved ZClone visual language.
+
+Default theme:
+Dark Neon Obsidian / Midnight Indigo.
+
+Theme presets:
+
+- Dark Neon.
+- Light Blue.
+- Purple Dream.
+- Green Nature.
+- Sunset.
+- Custom.
+
+Typography
+
+Proposed bundled fonts:
+
+- Space Grotesk.
+- Plus Jakarta Sans.
+- JetBrains Mono.
+
+Font licenses and redistribution permissions must be audited before bundling.
+
+Responsive Design
+
+Support:
+
+- Compact phones.
+- Medium-width devices.
+- Expanded screens.
+- Tablets.
+- Foldables where supported.
+
+Use Android native window insets and responsive layout APIs.
+
+Minimum interactive target size: 48dp where appropriate.
+
+UI Requirements
+
+Every visible button and interactive control must have a defined behavior.
+
+No fake progress indicators.
+
+No success message without a completed operation.
+
+No UI-only feature presented as implemented.
+
+---
+
+PART X — TESTING AND ACCEPTANCE
+
+32. FMS Library Testing
+
+Each reusable library must include:
+
+- Unit tests.
+- Integration tests.
+- API compatibility tests.
+- Lifecycle tests.
+- Error handling tests.
+- Security tests.
+- Performance tests where relevant.
+
+33. ZClone Testing
+
+Required tests:
+
+- APK inspection.
+- ZIP integrity.
+- Manifest parsing.
+- Manifest mutation.
+- Manifest serialization.
+- Icon replacement.
+- Repackaging.
+- Signing.
+- Signature verification.
+- Security scanner.
+- Compatibility analysis.
+- Local persistence.
+- Backup and restore.
+- Authentication.
+- Firestore access rules.
+- Device registration.
+- Cloud conflict resolution.
+- UI interaction.
+- Localization.
+- Accessibility.
+
+34. Acceptance Status
+
+Use:
+
+- PASS
+- FAIL
+- BLOCKED
+- NOT RUN
+- NOT APPLICABLE
+
+Every PASS must have evidence.
+
+An implementation is not VERIFIED merely because the code compiles.
+
+---
+
+PART XI — PROJECT DOCUMENTATION AND GOVERNANCE
+
+35. Required FMS Documents
+
+- FMS_MASTER_SPEC.md
+- FMS_LIBRARY_CATALOG.md
+- FMS_API_STANDARDS.md
+- FMS_ARCHITECTURE.md
+- FMS_DEPENDENCY_POLICY.md
+- FMS_SECURITY_MASTER.md
+- FMS_COMPATIBILITY_MATRIX.md
+- FMS_TEST_ACCEPTANCE_MATRIX.md
+- FMS_ROADMAP.md
+- FMS_RELEASE_HISTORY.md
+- FMS_RISK_REGISTER.md
+
+36. Required ZClone Documents
+
+- PROJECT_MASTER_SPEC.md
+- PROJECT_STATE.md
+- FEATURE_INVENTORY.md
+- FEATURE_PARITY_MATRIX.md
+- ENGINE_LIBRARY_MAP.md
+- ANDROID_COMPATIBILITY.md
+- SECURITY_MASTER_REPORT.md
+- DEPENDENCY_LICENSE_AUDIT.md
+- FIREBASE_ARCHITECTURE.md
+- TEST_ACCEPTANCE_MATRIX.md
+- MASTER_ROADMAP.md
+- CHECKPOINT_INDEX.md
+- IMPORT_HISTORY.md
+- GITHUB_SYNC_HISTORY.md
+- RISK_REGISTER.md
+- RESUME_INSTRUCTIONS.md
+
+Documentation must reflect actual project state.
+
+Do not create fabricated test reports or checkpoint evidence.
+
+---
+
+PART XII — CHECKPOINT AND IMPLEMENTATION ROADMAP
+
+37. Checkpoint Policy
+
+Each checkpoint must record:
+
+- Checkpoint ID.
+- Date and time.
+- Project phase.
+- Objective.
+- Files created.
+- Files modified.
+- Files deleted.
+- Tests executed.
+- Test evidence.
+- Security findings.
+- Build status.
+- Dependency changes.
+- Known limitations.
+- Git commit reference where available.
+- Source integrity information.
+- Next task.
+- Recovery instructions.
+
+Checkpoint statuses:
+
+- CREATED
+- VERIFIED
+- FAILED
+- RECOVERY REQUIRED
+- SUPERSEDED
+
+A checkpoint cannot be VERIFIED without evidence.
+
+38. Proposed Checkpoint Plan
+
+CP000 — Audit and Master Planning
+
+Scope:
+
+- Inspect actual workspace.
+- Identify actual source structure.
+- Audit existing dependencies.
+- Review project build configuration.
+- Review FMS architecture.
+- Audit official App Cloner catalog.
+- Build individual Feature Parity Matrix.
+- Review Android compatibility.
+- Review source security.
+- Prepare FMS library catalog.
+- Prepare implementation roadmap.
+- Prepare risk register.
+
+Acceptance:
+
+- Audit evidence recorded.
+- Missing information documented.
+- No implementation files modified.
+- User approval requested.
+
+CP001 — FMS Core Foundation
+
+Scope:
+
+- FMSCore.
+- FMSRuntime.
+- FMSModuleSystem.
+- FMSEventEngine.
+- FMSLifecycle.
+- FMSLogging.
+- FMSErrorEngine.
+
+Acceptance:
+
+- Module lifecycle tests pass.
+- Event communication tests pass.
+- API documentation exists.
+- Core sample application builds.
+
+CP002 — FMS Data and Security Foundation
+
+Scope:
+
+- FMSDatabaseEngine.
+- FMSPreferenceEngine.
+- FMSStorageEngine.
+- FMSMigrationEngine.
+- FMSSecurityStorage.
+- FMSKeyManager.
+- FMSAccessControl.
+
+Acceptance:
+
+- Local persistence tests pass.
+- Migration tests pass.
+- Security tests pass.
+- Sensitive storage tests pass.
+
+CP003 — FMS UI Framework
+
+Scope:
+
+- FMSUIEngine.
+- FMSRenderingEngine.
+- FMSDesignSystem.
+- FMSLayoutEngine.
+- FMSNavigationEngine.
+- FMSThemeEngine.
+- FMSAnimationEngine.
+- FMSAccessibility.
+
+Acceptance:
+
+- UI sample builds.
+- Navigation works.
+- Theme changes work.
+- Responsive layout tests pass.
+- Accessibility checks pass.
+
+CP004 — FMS Task, Network and Cloud
+
+Scope:
+
+- FMSBackgroundEngine.
+- FMSTaskScheduler.
+- FMSJobQueue.
+- FMSNetworkEngine.
+- FMSCloudEngine.
+- FMSAuthEngine.
+- FMSCloudSync.
+
+Acceptance:
+
+- Background task behavior verified.
+- Network handling tested.
+- Cloud synchronization tested.
+- Authentication and access rules verified.
+
+CP005 — ZClone Identity and Cloud Integration
+
+Scope:
+
+- Unique application identity.
+- Branding.
+- Icons and fonts.
+- Firebase provisioning.
+- Google Sign-In.
+- Firestore rules.
+- Device registration.
+- Cloud Sync.
+
+Acceptance:
+
+- Authentication tested.
+- Firestore rules tested.
+- Device registration works.
+- Local-only operation remains available.
+
+CP006 — FMSCloneEngine APK Processing
+
+Scope:
+
+- APK Inspector.
+- Binary Manifest Parser.
+- Binary Manifest Editor.
+- Icon Patcher.
+- Resource Inspector.
+- APK Repackager.
+- Signature Manager.
+- Security Scanner.
+- Compatibility Engine.
+
+Acceptance:
+
+- Unit and integration tests pass.
+- APK archive integrity verified.
+- Manifest mutation tests pass.
+- Signature verification passes.
+- Unsupported APK structures are correctly identified.
+
+CP007 — ZClone User Interface and Product Integration
+
+Scope:
+
+- Dashboard.
+- Clone Apps.
+- Application Configuration.
+- My Clones.
+- Theme Studio.
+- Device Manager.
+- Security Scanner.
+- FMSCloneEngine Hub.
+- Settings.
+
+Acceptance:
+
+- Every visible control has a real handler.
+- Local workflows are functional.
+- UI matches approved design.
+- Localization works.
+
+CP008 — Feature Parity and Advanced Capabilities
+
+Scope:
+
+- Official Feature Parity Matrix.
+- Add-on matrix.
+- Package matrix.
+- Extension matrix.
+- ZClone-exclusive features.
+- Backup and Restore.
+- Batch Clone.
+- Advanced configuration.
+
+Acceptance:
+
+- Every catalog feature has a status.
+- Every implemented feature has test evidence.
+- Unsupported features have documented reasons.
+
+CP009 — Final Security, Compatibility and Release Validation
+
+Scope:
+
+- Full security audit.
+- Dependency and license audit.
+- Android compatibility testing.
+- Regression tests.
+- APK and ZIP integrity.
+- Documentation.
+- Release preparation.
+
+Acceptance:
+
+- No unresolved critical security issues.
+- Required tests pass.
+- Known limitations documented.
+- Release artifacts verified.
+- User explicitly approves release.
+
+---
+
+PART XIII — EXECUTION CONTROL
+
+39. Execution Modes
+
+Mode A — Audit and Planning Only
+
+Allowed:
+
+- Read files.
+- Inspect source.
+- Analyze dependencies.
+- Search official documentation.
+- Prepare plans.
+- Generate reports.
+
+Not allowed:
+
+- Modify implementation files.
+- Delete source.
+- Replace architecture without approval.
+- Create fake test evidence.
+- Claim unperformed actions.
+
+Mode B — Approved Implementation
+
+Available only after explicit user approval.
+
+Requirements:
+
+- Follow the approved roadmap.
+- Preserve existing work.
+- Make small, reviewable changes.
+- Run relevant tests.
+- Record evidence.
+- Create verified checkpoints.
+
+Mode C — Resume
+
+Inspect actual workspace and checkpoint evidence before continuing.
+
+Never assume a previous session's claimed status without verification.
+
+Mode D — Import and Synchronization
+
+Support ZIP, folder, or Git repository imports where actual access is available.
+
+Workflow:
+IMPORT → INVENTORY → VALIDATE → COMPARE → PLAN → APPROVAL → APPLY.
+
+Never overwrite source or remote history without approval.
+
+Mode E — Release
+
+Requires explicit release approval.
+
+Perform complete build, signing, security, dependency, and integrity validation.
+
+---
+
+PART XIV — FIRST EXECUTION INSTRUCTIONS
+
+40. Initial Task
+
+Start in MODE A — AUDIT AND PLANNING ONLY.
+
+First inspect the actual workspace.
+
+Determine:
+
+- Actual project files.
+- Actual application ID.
+- Actual Gradle configuration.
+- Actual Kotlin configuration.
+- Existing Compose and Material dependencies.
+- Existing database dependencies.
+- Existing Firebase configuration.
+- Existing source implementation.
+- Existing tests.
+- Existing assets.
+- Existing Git configuration.
+- Actual Android minimum and target SDK.
+- Existing security configuration.
+
+Do not assume that any item in the supplied CP000 report remains accurate until checked.
+
+Next:
+
+1. Audit the current FMS library architecture.
+2. Identify overlaps and missing abstractions.
+3. Audit official App Cloner documentation.
+4. Build the complete individual feature inventory.
+5. Map features to FMSCloneEngine.
+6. Identify Android platform limitations.
+7. Audit external dependencies and licenses.
+8. Review source-code security.
+9. Prepare the revised implementation roadmap.
+10. Record risks and unresolved decisions.
+
+If no actual workspace or source files are available, report that limitation and prepare only the architecture specification.
+
+Do not fabricate workspace inspection results.
+
+41. Approval Gate
+
+After completing the audit and planning report:
+
+STOP.
+
+Present:
+
+- Actual workspace findings.
+- Confirmed architecture.
+- FMS library catalog.
+- ZClone feature inventory.
+- Feature Parity Matrix.
+- Android compatibility report.
+- Security and dependency audit.
+- Risk register.
+- Proposed checkpoints.
+- Required user decisions.
+
+Wait for explicit user approval before modifying implementation files.
+
+---
+
+FINAL GOVERNING RULE
+
+FMS is an independent and reusable ecosystem.
+
+ZClone is one product powered by FMSCloneEngine.
+
+All functionality must be real, testable, secure, maintainable, and honestly represented.
+
+Preserve source code security and project integrity above implementation speed.
+
+NO UNAPPROVED IMPLEMENTATION.
+NO DUMMY FEATURES.
+NO FABRICATED VERIFICATION.
+NO SILENT FEATURE OMISSIONS.
+NO SECURITY BYPASS.
+NO PRIVATE SIGNING MATERIALS IN DISTRIBUTION.
+
+END OF MASTER SPECIFICATION

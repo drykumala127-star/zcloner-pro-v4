@@ -1,0 +1,53 @@
+# IDE & Build Files
+*.iml
+.gradle/
+.gradle
+.kotlin/
+.kotlin
+/.idea/
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/local.properties
+local.properties
+/build/
+/build
+/app/build/
+/.build-outputs/
+/captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# Compiled Packages
+*.apk
+*.aab
+*.ap_
+
+# Environment & Local Secret Files (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Signing Credentials & Keystores (keep debug.keystore.base64 if needed for template parity)
+debug.keystore
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Firebase / Service Account Sensitive Credentials & Local Logs
+*service-account*.json
+*firebase-adminsdk*.json
+google-services.json.bak
+*-debug.log
+firebase-debug.log
+firestore-debug.log
+.firebase/
+node_modules/
